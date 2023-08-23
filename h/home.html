@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stationery Shop</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/check.css')}}">
+</head>
+<body>
+    <header>
+        <h1>Stationery Shop</h1>
+        <div class="text">
+        <ul >
+            <li><a href="{{url_for('home')}}">Home</a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('index')}}">Product</a>&nbsp;&nbsp;&nbsp;
+            contact&nbsp;&nbsp;&nbsp; sign out</li>
+        </ul>
+        </div>
+    </header>
+    <div class="ab">
+            <h1>Cash Tracker</h1>
+            <p><b>Initial Cash Balance: Rs. 1000</b></p>
+            <p id="cashBalance"><b>Cash Balance: Rs. 1000</b></p>
+    </div>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Purchase Items</h2>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="purchase" href="{{url_for('index')}}">Purchase Item</a>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sales Item</h2>
+            <label for="productName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item Name:</label>
+            <input type="text" id="productName">
+            <label for="productPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item Price:</label>
+            <input type="number" id="productPrice">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="makeSale()">Make Sale</button>
+
+    <script>
+        let cashBalance = 1000;
+        document.getElementById("cashBalance").textContent = `Cash Balance: Rs. ${cashBalance}`;
+
+        function makeSale() {
+            const productName = document.getElementById("productName").value;
+            const productPrice = parseFloat(document.getElementById("productPrice").value);
+
+            if (!productName || isNaN(productPrice) || productPrice <= 0) {
+                alert("Please enter a valid product name and price.");
+                return;
+            }
+
+            cashBalance += productPrice;
+            document.getElementById("cashBalance").textContent = `Cash Balance: Rs. ${cashBalance}`;
+        }
+    </script>
+</body>
+</html>

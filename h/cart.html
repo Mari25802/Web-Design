@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/check.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cartItems">
+        </ul>
+        <p>Total: Rs. <span id="cartTotal">0</span></p>
+    </div>
+                        <script>
+                    let cart = [];
+                    let cartTotal = 0;
+
+                    function addToCart(itemName, itemPrice) {
+                        cart.push({ name: itemName, price: itemPrice });
+                        cartTotal += itemPrice;
+                        
+                        updateCartDisplay();
+                    }
+
+                    function updateCartDisplay() {
+                        const cartItemsElement = document.getElementById("cartItems");
+                        const cartTotalElement = document.getElementById("cartTotal");
+                        
+                        cartItemsElement.innerHTML = "";
+                        
+                        for (const item of cart) {
+                            const listItem = document.createElement("li");
+                            listItem.textContent = `${item.name} - Rs. ${item.price}`;
+                            cartItemsElement.appendChild(listItem);
+                        }
+                        
+                        cartTotalElement.textContent = cartTotal;
+                    }
+                    </script>
+</body>
+</html>

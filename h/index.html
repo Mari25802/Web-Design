@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <script src="scripts.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stationery Shop</title>
+</head>
+<body>
+    <header>
+        <h1>Stationery Shop</h1>
+        <ul>
+            <li><a href="{{url_for('home')}}">Home</a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('index')}}">Product</a>&nbsp;&nbsp;&nbsp; contact
+            </li>
+        </ul>
+    </header>
+    <h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash Balance: Rs. <span id="cashBalance">1000</span></h2>
+
+    <div class="container">
+        <h1></h1>
+        <div class="item">
+            <div class="item-info">
+                <h2 class="item-name">Pen</h2>
+                <p class="item-price"> Rs. 10</p>
+            </div>
+            <button onclick="addToCart('pen', 10)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <h2 class="item-name">Pencil</h2>
+                <p class="item-price">Rs. 5</p>
+            </div>
+            <button onclick="addToCart('pencil', 5)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <h2 class="item-name">Eraser</h2>
+                <p class="item-price">Rs. 1</p>
+            </div>
+            <button onclick="addToCart('eraser', 1)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <h2 class="item-name">Sharpener</h2>
+                <p class="item-price"> Rs. 5</p>
+            </div>
+            <button onclick="addToCart('sharpener', 5)">Add to Cart</button>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <h2 class="item-name">Geometry Box</h2>
+                <p class="item-price"> Rs. 50</p>
+            </div>
+            <button onclick="addToCart('geometryBox', 50)">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cartItems">
+        </ul>
+        <p>Total: Rs. <span id="cartTotal">0</span></p>
+        <button onclick="purchaseItems()">Purchase</button>
+    </div>
+
+    <script>
+        let cashBalance = 1000;
+        document.getElementById("cashBalance").textContent = cashBalance;
+
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            cartTotal += itemPrice;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsElement = document.getElementById("cartItems");
+            const cartTotalElement = document.getElementById("cartTotal");
+            
+            cartItemsElement.innerHTML = "";
+            
+            for (const item of cart) {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${item.name} - Rs. ${item.price}`;
+                cartItemsElement.appendChild(listItem);
+            }
+            
+            cartTotalElement.textContent = cartTotal;
+        }
+
+        function purchaseItems() {
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            const confirmPurchase = confirm("Confirm purchase?");
+            if (confirmPurchase) {
+                if (cartTotal <= cashBalance) {
+                    cashBalance -= cartTotal;
+                    document.getElementById("cashBalance").textContent = cashBalance;
+                    alert("Purchase successful! Cash balance updated.");
+                    
+                    // Clear the cart after purchase
+                    cart = [];
+                    cartTotal = 0;
+                    updateCartDisplay();
+                } else {
+                    alert("Insufficient funds for purchase.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
