@@ -1,0 +1,34 @@
+header {
+    background-color: #2a96ae;
+    color: white;
+    text-align:center;
+    padding: 10px;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:lightgrey;
+  }
+a{
+    text-align: center;
+    color: white;
+}
+.purchase{
+  color:white;
+  text-decoration:none;
+  background-color: black;
+  padding:5px;
+}
+input{
+  display: flex;
+  align-items: center;
+  margin: 5px;
+
+}
+.ab{
+text-align: center;
+}
+.abc{
+  text-align: center;
+}
